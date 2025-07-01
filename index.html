@@ -114,6 +114,7 @@
       </div>
     </section>
 
+
     <section class="projects-section" id="projects">
         <div class="projects-container">
             <h2 class="projects-title">My Projects</h2>
@@ -535,6 +536,42 @@
         loader.classList.add('fade-out');
         setTimeout(() => loader.remove(), 700);
       }, wait);
+    }
+  });
+</script>
+<script>
+  function isAboveViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return rect.bottom < 0;
+  }
+  function isInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top < window.innerHeight &&
+      rect.bottom > 0
+    );
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const resumeBtn = document.querySelector('.download-resume-btn');
+    if (resumeBtn) {
+      if (isAboveViewport(resumeBtn)) {
+        resumeBtn.classList.add('animate');
+        resumeBtn.style.setProperty('--delay', '0s');
+      } else if (isInViewport(resumeBtn)) {
+        resumeBtn.classList.add('animate');
+        resumeBtn.style.setProperty('--delay', '1.3s');
+      } else {
+        const observer = new window.IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              resumeBtn.classList.add('animate');
+              resumeBtn.style.setProperty('--delay', '1.3s');
+              observer.unobserve(resumeBtn);
+            }
+          });
+        }, { threshold: 0.3 });
+        observer.observe(resumeBtn);
+      }
     }
   });
 </script>

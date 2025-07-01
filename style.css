@@ -361,6 +361,8 @@ html, body {
 }
 
 .download-resume-btn {
+  opacity: 0;
+  transform: translateY(40px);
   display: inline-block;
   padding: 12px 32px;
   background: #000000;
@@ -375,6 +377,10 @@ html, body {
   margin-top: 8px;
   letter-spacing: 0.5px;
 }
+.download-resume-btn.animate {
+  animation: fadeUpInSkillsItem 1s cubic-bezier(.4,2,.3,1) var(--delay, 0s) forwards;
+}
+
 .download-resume-btn:hover {
   background: #ffffff;
   color: #000000;
