@@ -114,12 +114,18 @@
       </div>
     </section>
 
-
     <section class="projects-section" id="projects">
         <div class="projects-container">
             <h2 class="projects-title">My Projects</h2>
             <p class="projects-intro">A selection of my recent work, showcasing my skills in software development, design, and problem-solving.</p>
             <div class="projects-cards modern-grid">
+                <div class="modern-project-card" data-title="Employee Activity Monitoring and Task Management System" data-type="Web App" data-desc="A web-based system for managers to monitor employee work progress in real time while allowing employees to record their daily activities in a structured and transparent manner. Built with PHP, MySQL, HTML, CSS, JavaScript, and Bootstrap, featuring responsive design and calendar-based task scheduling feature. <span><a href='http://sibugay.page.gd' target='_blank' style='color: #000;'>View Project</a></span>" data-github="#" data-live="#">
+                    <img src="assets/plgu-system.png" alt="Project 1" class="project-image">
+                    <div class="project-overlay">
+                        <span class="overlay-title">Employee Activity Monitoring and Task Management System</span>
+                        <span class="overlay-type">Web App</span>
+                    </div>
+                </div>
                 <div class="modern-project-card" data-title="VerifiED" data-type="Blockchain-based Academic Credential Verification System" data-desc="A decentralized web-application system for verifying academic credentials from Higher academic institutions, ensuring authenticity and preventing fraud. Built using Polygon Blockchain Network, React.js, and Node.js, featuring a user-friendly interface and secure smart contracts. <span><a href='https://reignian.github.io/verified/' target='_blank' style='color: #000;'>View Project</a></span>" data-github="#" data-live="#">
                     <img src="assets/verified.png" alt="Project 1" class="project-image">
                     <div class="project-overlay">
@@ -155,7 +161,7 @@
                         <span class="overlay-type">AI/ML Project</span>
                     </div>
                 </div>
-                <div class="modern-project-card" data-title="WhiteLife: Animal Shelter" data-type="UI Design" data-desc="A website concept supporting an organization dedicated to providing a safe and loving environment for animals in need. The system enables users to adopt, foster, surrender pets, and donate goods, making it easier for the community to support and care for animals. Designed in Figma. <span><a href='https://www.figma.com/proto/erkP27qzCRArsbkvxjzLCn/Figma-basics?node-id=507-51&t=KtgPwX2e3nCjpcFC-1&scaling=min-zoom&content-scaling=fixed&page-id=515%3A64&starting-point-node-id=507%3A51' target='_blank' style='color: #000;'>View Project</a></span>" data-github="#" data-live="#">
+                <div class="modern-project-card" data-title="WhiteLife: Animal Shelter" data-type="UI Design" data-desc="A website concept supporting an organization dedicated to providing a safe and loving environment for animals in need. The system enables users to adopt, foster, surrender pets, and donate goods, making it easier for the community to support and care for animals. Designed in Figma." data-github="#" data-live="#">
                     <img src="assets/animal shelter.png" alt="Project 5" class="project-image">
                     <div class="project-overlay">
                         <span class="overlay-title">WhiteLife: Animal Shelter</span>
@@ -219,16 +225,16 @@
               <span class="contact-icon">
                 <svg width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.5 14.5v2a2 2 0 0 1-2.18 2A15.94 15.94 0 0 1 4.5 6.68 2 2 0 0 1 6.5 4.5h2a1 1 0 0 1 1 .75l.45 2a1 1 0 0 1-.29 1l-1.13 1.13a13 13 0 0 0 5.07 5.07l1.13-1.13a1 1 0 0 1 1-.29l2 .45a1 1 0 0 1 .75 1Z" stroke="#000" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
-              <span>+63 999 806 5631</span>
+              <span>(+63) 999 806 5631 / (+63) 975 244 1070</span>
             </div>
           </div>
         </div>
-        <form class="contact-form" autocomplete="off">
+        <form class="contact-form" id="contactForm" autocomplete="off">
           <div class="form-group">
             <input type="text" id="name" name="name" required placeholder="Your Name">
           </div>
           <div class="form-group">
-            <input type="email" id="email" name="email" required placeholder="Your Email">
+            <input type="text" id="email" name="email" required placeholder="Your Email / Contact Number">
           </div>
           <div class="form-group">
             <input type="text" id="subject" name="subject" required placeholder="Subject">
@@ -573,6 +579,37 @@
         observer.observe(resumeBtn);
       }
     }
+  });
+</script>
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const form = this;
+    const formData = new FormData(form);
+    const submitBtn = form.querySelector('.contact-btn');
+    const originalText = submitBtn.textContent;
+
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+
+    fetch('https://script.google.com/macros/s/AKfycbwxJJOBsWrkbZ0qd95KvzqrcsQTt_tJZv4P8tiD_9oBkv5iJUB6EcFLERom5kuwtl5mdQ/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      body: formData
+    })
+    .then(() => {
+      alert('Message sent successfully!');
+      form.reset();
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Failed to send message. Please try again.');
+    })
+    .finally(() => {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    });
   });
 </script>
 </body>
